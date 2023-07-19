@@ -18,7 +18,7 @@ public class ItemWriterConfiguration {
     public ItemWriter<Student> studentWriter() {
         return new FlatFileItemWriterBuilder<Student>()
                 .name("studentWriter")
-                .resource(new FileSystemResource("output/result.csv"))
+                .resource(new FileSystemResource("out/result.csv"))
                 .lineSeparator("\n")
                 .lineAggregator(student -> new StringJoiner("\t")
                         .add(Long.toString(student.getId()))
