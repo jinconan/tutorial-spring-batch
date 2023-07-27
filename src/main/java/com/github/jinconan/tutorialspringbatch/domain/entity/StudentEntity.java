@@ -2,16 +2,12 @@ package com.github.jinconan.tutorialspringbatch.domain.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.ToString;
-import org.springframework.batch.item.file.transform.LineAggregator;
-
-import java.text.MessageFormat;
 
 
 @Entity
+@Table(name = "STUDENT")
 @Getter
-@ToString
-public class Student {
+public class StudentEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,4 +17,12 @@ public class Student {
 
     private Integer age;
 
+    @Override
+    public String toString() {
+        return "Student{" +
+            "id=" + id +
+            ", name='" + name + '\'' +
+            ", age=" + age +
+            '}';
+    }
 }
