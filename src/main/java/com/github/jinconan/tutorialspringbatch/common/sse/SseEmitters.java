@@ -51,7 +51,9 @@ public class SseEmitters {
             .name("message")
             .data(new SseMessage(type, level, message, payload)));
       } catch (IOException e) {
-        throw new RuntimeException(e);
+        log.error(e.getMessage(), e);
+        // 예외를 던지면 전체 루프가 막힘
+//        throw new RuntimeException(e);
       }
     });
   }

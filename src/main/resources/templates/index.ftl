@@ -15,9 +15,23 @@
       table tr.job-row td {
         background-color: darkseagreen;
       }
+
       table tr.step-row td {
         background-color: cornsilk;
         padding-left: 10px;
+      }
+
+      table tr.step-row td.read-msg {
+        background-color: cornsilk;
+      }
+
+      table tr.step-row td.process-msg {
+        background-color: darkgoldenrod;
+      }
+
+      table tr.step-row td.write-msg {
+        background-color: darkred;
+        color: white;
       }
     </style>
   </head>
@@ -52,7 +66,11 @@
                 <tbody v-else>
                   <tr v-for="(data,index) in log" :class="{'job-row': data.type === 'JOB', 'step-row': data.type === 'STEP' }">
                     <td>{{data.type}}</td>
-                    <td>{{data.message}}</td>
+                    <td :class="{
+                      'read-msg': data.step === 'READ',
+                      'process-msg': data.step === 'PROCESS',
+                      'write-msg': data.step === 'WRITE'
+                    }">{{data.message}}</td>
                     <td>
                       <el-button v-if="typeof data.payload === 'object' && data.payload !== null"
                           type="primary" size="small" @click="onDetailPayload(index)"
@@ -89,6 +107,15 @@
             sse.addEventListener('message', e => {
               const { data } = e;
               const obj = JSON.parse(data);
+
+              if (obj.message.indexOf('Read') > -1) {
+                obj.step = 'READ';
+              } else if (obj.message.indexOf('Process') > -1) {
+                obj.step = 'PROCESS';
+              } else if (obj.message.indexOf('Write') > -1) {
+                obj.step = 'WRITE';
+              }
+
               console.log(obj);
               this.log.push(obj);
             });
