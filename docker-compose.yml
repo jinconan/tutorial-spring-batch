@@ -1,0 +1,14 @@
+services:
+  mysql:
+    image: mysql:8
+    ports:
+      - 23306:3306
+    volumes:
+      - mysql:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root1234
+      MYSQL_DATABASE: batch
+      MYSQL_USER: batch
+      MYSQL_PASSWORD: batch1234
+volumes:
+  mysql:

@@ -5,17 +5,27 @@ spring:
   batch:
     job:
       enabled: false
+    jdbc:
+      initialize-schema: always
   datasource:
-    driver-class-name: org.h2.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:
-      jdbc-url: jdbc:h2:mem:testdb
-      username: sa
-      password:
+      jdbc-url: jdbc:mysql://localhost:23306/batch
+      username: batch
+      password: batch1234
+  #    driver-class-name: org.h2.Driver
+#    hikari:
+#      jdbc-url: jdbc:h2:mem:testdb
+#      username: sa
+#      password:
   jpa:
-    database: h2
+#    database: h2
+    database: mysql
     hibernate:
       ddl-auto: create
     show-sql: true
+#    defer-datasource-initialization: true
+
 
   freemarker:
     suffix: .ftl
@@ -25,6 +35,5 @@ spring:
       static-locations: classpath:/static/
 
 custom:
-
 
 ---

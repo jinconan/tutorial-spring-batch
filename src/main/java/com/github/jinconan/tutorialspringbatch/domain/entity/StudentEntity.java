@@ -2,11 +2,13 @@ package com.github.jinconan.tutorialspringbatch.domain.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.ToString;
 
 
 @Entity
 @Table(name = "STUDENT")
 @Getter
+@ToString
 public class StudentEntity {
 
     @Id
@@ -17,12 +19,4 @@ public class StudentEntity {
 
     private Integer age;
 
-    @Override
-    public String toString() {
-        return "Student{" +
-            "id=" + id +
-            ", name='" + name + '\'' +
-            ", age=" + age +
-            '}';
-    }
 }
